@@ -6,6 +6,7 @@ body{
     align-items: center;
     box-sizing: border-box;
     overflow: hidden;
+    flex-direction: column;
 }
 
 x3d{
