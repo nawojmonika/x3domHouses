@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>My first X3DOM page</title>
+    <script type='text/javascript' src='http://www.x3dom.org/download/x3dom.js'></script>
+    <link rel='stylesheet' type='text/css' href='http://www.x3dom.org/download/x3dom.css'/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+<x3d>
+    <scene>
+        <Group DEF='House'>
+            <!--Roof-->
+            <Transform translation="0 2.5 0" rotation="0 1 0 0.785398163"> <!-- Rotate by 45 degrees-->
+                <Shape DEF='Roof'>
+                    <Appearance>
+                        <Material diffuseColor='1 0 0'/>
+                    </Appearance>
+                    <Cone bottomRadius="1.8" height="1" subdivision="4">
+                    </Cone>
+                </Shape>
+            </Transform>
+            <!--Building-->
+            <Transform translation="0 1 0">
+                <Shape>
+                    <Appearance>
+                        <Material diffuseColor='1 1 0'/>
+                    </Appearance>
+                    <Box/>
+                </Shape>
+            </Transform>
+        </Group>
+    </scene>
+</x3d>
+</body>
+</html>
