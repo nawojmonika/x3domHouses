@@ -1,14 +1,17 @@
-<html>
+<html lang="pl-pl" >
 <head>
     <title>My first X3DOM page</title>
     <script type='text/javascript' src='http://www.x3dom.org/download/x3dom.js'></script>
     <link rel='stylesheet' type='text/css' href='http://www.x3dom.org/download/x3dom.css'/>
     <link rel="stylesheet" type="text/css" href="style.css"/>
+    <meta charset="UTF-8">
 </head>
 <body>
 <x3d>
     <scene>
         <Viewpoint position="19.54189 1.67126 -3.43897" orientation="-0.05584 0.99813 0.02471 1.74510" zNear="2.79038" zFar="43.42864" description="defaultX3DViewpointNode"></Viewpoint>
+        <background  skyColor="0 0 0"></background>
+        <DirectionalLight id="directional" direction='0 -1 0.7' on="TRUE" intensity='2.0' shadowIntensity='0.5'></DirectionalLight>
         <Group DEF='House'>
             <!--Roof-->
             <Transform translation="0 2.5 0" rotation="0 1 0 0.785398163"> <!-- Rotate by 45 degrees-->
@@ -120,12 +123,13 @@
     </scene>
 </x3d>
 <div id="tools" style="width: 500px;">
+    <input type="checkbox" checked="true" onclick="lightSwitch('directional')">
+    <label>Nieruchome światło kierunkowe</label>
     <input type="checkbox" checked="true" onclick="lightSwitch('point')">
     <label>point light</label>
     <input type="checkbox" checked="true" onclick="lightSwitch('spot')">
     <label>spot light</label>
-    <input type="checkbox" checked="true" onclick="lightSwitch('directional')">
-    <label>directional light</label>
+
     <input type="checkbox" checked="true" onclick="headlight()">
     <label>headlight</label>
 </div>
