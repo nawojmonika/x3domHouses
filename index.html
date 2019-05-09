@@ -9,9 +9,13 @@
 <body>
 <x3d>
     <scene>
-        <Viewpoint position="19.54189 1.67126 -3.43897" orientation="-0.05584 0.99813 0.02471 1.74510" zNear="2.79038" zFar="43.42864" description="defaultX3DViewpointNode"></Viewpoint>
+        <Viewpoint position="-3.25762 23.85703 48.74621" orientation="-0.99104 -0.13344 -0.00551 0.46917"></Viewpoint>
+
+        <!--<Viewpoint position="19.54189 1.67126 -3.43897" orientation="-0.05584 0.99813 0.02471 1.74510" zNear="2.79038" zFar="43.42864" description="defaultX3DViewpointNode"></Viewpoint>-->
         <background  skyColor="0 0 0"></background>
-        <DirectionalLight id="directional" direction='0 -1 0.7' on="TRUE" intensity='2.0' shadowIntensity='0.5'></DirectionalLight>
+        <directionalLight id="directional" direction='-1 -1 0' on="TRUE" intensity='2.0' shadowIntensity='0.5'>
+        </directionalLight>
+        <pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1' color='0 0 1' location='-9 2 0.5 ' shadowIntensity="0.5"> </pointLight>
         <Group DEF='House'>
             <!--Roof-->
             <Transform translation="0 2.5 0" rotation="0 1 0 0.785398163"> <!-- Rotate by 45 degrees-->
@@ -123,15 +127,11 @@
     </scene>
 </x3d>
 <div id="tools" style="width: 500px;">
-    <input type="checkbox" checked="true" onclick="lightSwitch('directional')">
-    <label>Nieruchome światło kierunkowe</label>
-    <input type="checkbox" checked="true" onclick="lightSwitch('point')">
-    <label>point light</label>
-    <input type="checkbox" checked="true" onclick="lightSwitch('spot')">
-    <label>spot light</label>
+    <input id="directionalLight" type="checkbox" checked="true" onclick="lightSwitch('directional')">
+    <label for="directionalLight">Nieruchome światło kierunkowe</label>
 
-    <input type="checkbox" checked="true" onclick="headlight()">
-    <label>headlight</label>
+    <input id="pointLight" type="checkbox" checked="true" onclick="lightSwitch('point')">
+    <label for="pointLight">Poruszające się światło punktowe</label>
 </div>
 <script>
     function lightSwitch(id){
@@ -141,16 +141,6 @@
         else
             light.setAttribute('on','FALSE');
     }
-
-    function headlight()
-    {
-        var h = document.getElementById("head");
-        if(h.getAttribute('headlight')=='true')
-            h.setAttribute('headlight', 'false');
-        else
-            h.setAttribute('headlight', 'true');
-    }
-
 </script>
 </body>
 </html>
