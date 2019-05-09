@@ -13,7 +13,7 @@
             <Transform translation="0 2.5 0" rotation="0 1 0 0.785398163"> <!-- Rotate by 45 degrees-->
                 <Shape DEF='Roof'>
                     <Appearance>
-                        <ImageTexture  url="./assets/roofTexture.jpg"/>
+                        <ImageTexture url="./assets/roofTexture.jpg"/>
                     </Appearance>
                     <Cone bottomRadius="1.8" height="1" subdivision="4">
                     </Cone>
@@ -23,12 +23,90 @@
             <Transform translation="0 1 0">
                 <Shape>
                     <Appearance>
-                        <ImageTexture  url="./assets/wallTexture.jpg"/>
+                        <ImageTexture url="./assets/wallTexture.jpg"/>
                     </Appearance>
                     <Box/>
                 </Shape>
             </Transform>
         </Group>
+        <!--Houses from right and left from original-->
+        <Transform translation="3 0 0">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="6 0 0">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="-3 0 0">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="-6 0 0">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <!-- Second row-->
+        <Transform translation="0 0 3">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="3 0 3">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="6 0 3">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="-3 0 3">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="-6 0 3">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <!-- Third row-->
+        <Transform translation="0 0 6">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="3 0 6">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="6 0 6">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="-3 0 6">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="-6 0 6">
+            <Shape USE="House"></Shape>
+        </Transform>
+
+        <!-- Fourth row with a break-->
+        <Transform translation="0 0 -6">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="3 0 -6">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="6 0 -6">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="-3 0 -6">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="-6 0 -6">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <!-- Fifth row-->
+        <Transform translation="0 0 -9">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="3 0 -9">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="6 0 -9">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="-3 0 -9">
+            <Shape USE="House"></Shape>
+        </Transform>
+        <Transform translation="-6 0 -9">
+            <Shape USE="House"></Shape>
+        </Transform>
     </scene>
 </x3d>
 </body>
