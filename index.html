@@ -11,10 +11,11 @@
     <scene>
         <Viewpoint position="19.54189 1.67126 -3.43897" orientation="-0.05584 0.99813 0.02471 1.74510" zNear="2.79038" zFar="43.42864" description="defaultX3DViewpointNode"></Viewpoint>
         <background  skyColor="0 0 0"></background>
-        <!--<directionalLight id="directional" direction='-1 -1 0' on="TRUE" intensity='2.0' shadowIntensity='0.5'>-->
-        <!--</directionalLight>-->
+        <directionalLight id="directional" direction='-1 -1 0' on="TRUE" intensity='2.0' shadowIntensity='0.5'>
+        </directionalLight>
         <spotLight id='spot1' on="TRUE"  color='0 0 1' location='6 1.5 -2' shadowIntensity="0.3" radius="2" intensity='1' ambientIntensity='1'></spotLight>
-        <!--<pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1' color='0 0 1' location='-9 2 0.5 ' shadowIntensity="0.5"> </pointLight>-->
+        <spotLight id='spot2' on="TRUE"  color='0 0 1' location='6 1.5 -6' direction="0 0 0" shadowIntensity="0.3" radius="2" intensity='1' ambientIntensity='1'></spotLight>
+        <pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1' color='0 0 1' location='-9 2 0.5 ' shadowIntensity="0.5"> </pointLight>
         <Group DEF='House'>
             <!--Roof-->
             <Transform translation="0 2.5 0" rotation="0 1 0 0.785398163"> <!-- Rotate by 45 degrees-->
@@ -131,6 +132,9 @@
 
     <input id="spot1Light" type="checkbox" checked="true" onclick="lightSwitch('spot1')">
     <label for="spot1Light">Światło reflektorowe 1</label>
+
+    <input id="spot2Light" type="checkbox" checked="true" onclick="lightSwitch('spot2')">
+    <label for="spot2Light">Światło reflektorowe 2</label>
 
     <input id="pointLight" type="checkbox" checked="true" onclick="lightSwitch('point')">
     <label for="pointLight">Poruszające się światło punktowe</label>
