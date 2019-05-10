@@ -31,14 +31,14 @@
         <!--Houses-->
         <Group DEF='House'>
             <!--Roof-->
-            <Transform translation="0 2.5 0" rotation="0 1 0 0.785398163"> <!-- Rotate by 45 degrees-->
+            <Transform translation="0 2.5 0" rotation="0 1 0 0">
                 <Shape DEF='Roof'>
                     <Appearance>
                         <CommonSurfaceShader diffuseFacor='1 1 1' specularFactor='1 1 1' shininessFactor='1'>
                         <ImageTexture containerField='diffuseTexture' url="./assets/roofTexture.jpg"/>
                         </CommonSurfaceShader>
                     </Appearance>
-                    <Cone bottomRadius="1.8" height="1" subdivision="4">
+                    <Cone bottomRadius="1.8" height="1.5">
                     </Cone>
                 </Shape>
             </Transform>
