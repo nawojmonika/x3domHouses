@@ -9,18 +9,25 @@
 <body>
 <x3d>
     <scene id="content">
-        <Environment id='myEnv' SSAO='true' SSAOamount='0.5' SSAOblurDepthTreshold='1.0' SSAOradius='0.7' gammaCorrectionDefault="linear"></Environment>
+        <Environment id='myEnv' SSAO='true' SSAOamount='0.5' SSAOblurDepthTreshold='1.0' SSAOradius='0.7'
+                     gammaCorrectionDefault="linear"></Environment>
         <navigationInfo type='"examine" "any"' headlight="false" id="navType"></navigationInfo>
-        <Viewpoint position="19.54189 1.67126 -3.43897" orientation="-0.05584 0.99813 0.02471 1.74510" zNear="2.79038"
+        <!--ViewPoints-->
+        <Viewpoint position="18.42716 7.53001 -0.49374" orientation="-0.19687 0.96414 0.17800 1.62916" zNear="2.79038"
                    zFar="43.42864" description="defaultX3DViewpointNode"></Viewpoint>
+
+        <Viewpoint id="walkingView" position="0.40672 0.57194 9.97534" orientation="-0.81516 0.57906 -0.01422 0.07025"
+                   zNear="0.00317" zFar="31.70807" description="defaultX3DViewpointNode"></Viewpoint>
+
+
         <background skyColor="0 0 0"></background>
         <!--Lights-->
         <directionalLight id="directional" direction='-1 -1 0' on="TRUE" intensity='2.0' shadowIntensity="0.2">
         </directionalLight>
-        <SpotLight id='spot1' on="TRUE" beamWidth='5' color='0 0 1'  location='5 0 0' direction="3 1 0"
+        <SpotLight id='spot1' on="TRUE" beamWidth='5' color='0 0 1' location='5 0 0' direction="3 1 0"
                    radius='5' shadowIntensity="0.2"></SpotLight>
-        <SpotLight id='spot2' on="TRUE" beamWidth='5' color='1 0 0'  location='0 0 5' direction="1 1 0"
-                   radius='5'shadowIntensity="0.2"></SpotLight>
+        <SpotLight id='spot2' on="TRUE" beamWidth='5' color='1 0 0' location='0 0 5' direction="1 1 0"
+                   radius='5' shadowIntensity="0.2"></SpotLight>
         <pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1' shadowIntensity="0.3"></pointLight>
 
         <!--Houses-->
@@ -30,7 +37,7 @@
                 <Shape DEF='Roof'>
                     <Appearance>
                         <CommonSurfaceShader diffuseFacor='1 1 1' specularFactor='1 1 1' shininessFactor='1'>
-                        <ImageTexture containerField='diffuseTexture' url="./assets/roofTexture.jpg"/>
+                            <ImageTexture containerField='diffuseTexture' url="./assets/roofTexture.jpg"/>
                         </CommonSurfaceShader>
                     </Appearance>
                     <Cone bottomRadius="1.8" height="1">
@@ -43,7 +50,7 @@
                     <Appearance>
                         <CommonSurfaceShader diffuseFacor='1 1 1' specularFactor='1 1 1' shininessFactor='1'>
 
-                        <ImageTexture containerField='diffuseTexture' url="./assets/wallTexture.jpg"/>
+                            <ImageTexture containerField='diffuseTexture' url="./assets/wallTexture.jpg"/>
                         </CommonSurfaceShader>
                     </Appearance>
                     <Cylinder/>
@@ -56,7 +63,7 @@
                 <Appearance>
                     <CommonSurfaceShader diffuseFacor='1 1 1' specularFactor='1 1 1' shininessFactor='1'>
 
-                    <ImageTexture containerField='diffuseTexture' url="./assets/grassTexture.jpg"/>
+                        <ImageTexture containerField='diffuseTexture' url="./assets/grassTexture.jpg"/>
                     </CommonSurfaceShader>
                 </Appearance>
 
@@ -81,7 +88,7 @@
     <input id="headlight" type="checkbox" checked="true" onclick="headlight()">
     <label for="headlight">Headlight</label>
 
-    <input id="gameMode" type="checkbox"  onclick="setGameMode()">
+    <input id="gameMode" type="checkbox" onclick="setGameMode()">
     <label for="gameMode">Poruszanie się strzałkami</label>
 </div>
 <script>
@@ -93,36 +100,32 @@
             light.setAttribute('on', 'FALSE');
     }
 
-    function headlight()
-    {
+    function headlight() {
         var h = document.getElementById("navType");
-        if(h.getAttribute('headlight')=='true')
+        if (h.getAttribute('headlight') == 'true')
             h.setAttribute('headlight', 'false');
         else
             h.setAttribute('headlight', 'true');
     }
 
     function createHouses() {
-     var scene = document.getElementById("content");
+        var scene = document.getElementById("content");
 
         // Houses from right and left from original
-        for(let i=-9; i<=9; i+=3){
-            for(let j=-9; j<=9; j+=3){
+        for (let i = -9; i <= 9; i += 3) {
+            for (let j = -9; j <= 9; j += 3) {
                 let transform = document.createElement("Transform");
                 let house = document.createElement("Shape");
                 house.setAttribute("USE", "House");
                 // Creating spaces
-                i = i === 0 ? i+3 : i;
-                j = j === 0 ? j+3 : j;
+                i = i === 0 ? i + 3 : i;
+                j = j === 0 ? j + 3 : j;
                 transform.setAttribute("translation", `${i} 0 ${j}`);
                 transform.appendChild(house);
                 scene.appendChild(transform);
             }
-
         }
-
     }
-
 
     function moveLighting() {
         let interval = setInterval(myTimer, 10);
@@ -153,9 +156,10 @@
 
     function setGameMode() {
         document.getElementById('navType').setAttribute("type", "game");
+        document.getElementById('walkingView').setAttribute('set_bind', 'true');
     }
 
-    function init(){
+    function init() {
         createHouses();
         moveLighting();
     }
