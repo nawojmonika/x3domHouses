@@ -16,12 +16,11 @@
         <!--Lights-->
         <!--<directionalLight id="directional" direction='-1 -1 0' on="TRUE" intensity='2.0' >-->
         <!--</directionalLight>-->
-        <SpotLight id='spot1' on="TRUE" beamWidth='5' color='0 0 1'  location='5 0 0' direction="3 1 0"
-                   radius='5'></SpotLight>
-        <SpotLight id='spot2' on="TRUE" beamWidth='5' color='1 0 0'  location='0 0 5' direction="1 1 0"
-                   radius='5'></SpotLight>
-        <!--<pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1' color='0 0 1' location='-9 2 0.5 '-->
-                    <!--shadowIntensity="0.5"></pointLight>-->
+        <!--<SpotLight id='spot1' on="TRUE" beamWidth='5' color='0 0 1'  location='5 0 0' direction="3 1 0"-->
+                   <!--radius='5'></SpotLight>-->
+        <!--<SpotLight id='spot2' on="TRUE" beamWidth='5' color='1 0 0'  location='0 0 5' direction="1 1 0"-->
+                   <!--radius='5'></SpotLight>-->
+        <pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1' color='0 1 0'></pointLight>
 
         <!--Houses-->
         <Group DEF='House'>
@@ -127,7 +126,7 @@
     function moveLighting() {
         let interval = setInterval(myTimer, 10);
         let theta = 0;  // angle that will be increased each loop
-        let r = 30;
+        let r = 10;
 
         function myTimer() {
             let h = 0;     // x coordinate of circle center
@@ -141,9 +140,9 @@
                 theta = 0;
             }
             let x = h + r * Math.cos(theta);
-            let y = k + r * Math.sin(theta);
+            let z = k + r * Math.sin(theta);
 
-            var newPos = new x3dom.fields.SFVec3f(x, y, 0);
+            var newPos = new x3dom.fields.SFVec3f(x, 10, z);
 
             //Set the newly created array as new position for the second ball
             document.getElementById("point").setAttribute('location', newPos.toString());
@@ -157,7 +156,7 @@
 
     function init(){
         createHouses();
-        // moveLighting();
+        moveLighting();
     }
 
     init();
