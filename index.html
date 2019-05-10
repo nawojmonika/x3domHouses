@@ -110,14 +110,11 @@
         var scene = document.getElementById("content");
 
         // Houses from right and left from original
-        for (let i = -9; i <= 9; i += 3) {
-            for (let j = -9; j <= 9; j += 3) {
+        for (let i = -12; i <= 12; i += 6) {
+            for (let j = -12; j <= 12; j += 6) {
                 let transform = document.createElement("Transform");
                 let house = document.createElement("Shape");
                 house.setAttribute("USE", "House");
-                // Creating spaces
-                i = i === 0 ? i + 3 : i;
-                j = j === 0 ? j + 3 : j;
                 transform.setAttribute("translation", `${i} 0 ${j}`);
                 transform.appendChild(house);
                 scene.appendChild(transform);
