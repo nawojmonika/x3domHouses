@@ -12,8 +12,7 @@
         <Environment id='myEnv' SSAO='true' SSAOamount='0.5' SSAOblurDepthTreshold='1.0' SSAOradius='0.7'
                      gammaCorrectionDefault="linear"></Environment>
         <navigationInfo type='"examine" "any"' headlight="false" id="navType"></navigationInfo>
-        <!--ViewPoints-->
-        <Viewpoint position="18.42716 7.53001 -0.49374" orientation="-0.19687 0.96414 0.17800 1.62916" zNear="2.79038"
+        <Viewpoint position="19.54189 1.67126 -3.43897" orientation="-0.05584 0.99813 0.02471 1.74510" zNear="2.79038"
                    zFar="43.42864" description="defaultX3DViewpointNode"></Viewpoint>
 
         <Viewpoint id="walkingView" position="0.40672 0.57194 9.97534" orientation="-0.81516 0.57906 -0.01422 0.07025"
@@ -24,11 +23,11 @@
         <!--Lights-->
         <directionalLight id="directional" direction='-1 -1 0' on="TRUE" intensity='2.0' shadowIntensity="0.2">
         </directionalLight>
-        <SpotLight id='spot1' on="TRUE" beamWidth='5' color='0 0 1' location='5 0 0' direction="3 1 0"
-                   radius='5' shadowIntensity="0.2"></SpotLight>
-        <SpotLight id='spot2' on="TRUE" beamWidth='5' color='1 0 0' location='0 0 5' direction="1 1 0"
-                   radius='5' shadowIntensity="0.2"></SpotLight>
-        <pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1' shadowIntensity="0.3"></pointLight>
+        <SpotLight id='spot1' on="TRUE" beamWidth='5' color='0 0 1'  location='3 2 -1' direction="-4 0 3" cutOffAngle='0.78'
+                   radius='5'></SpotLight>
+        <SpotLight id='spot2' on="TRUE" beamWidth='5' color='1 0 0'  location='8 2 -1' direction="0 -1 1" cutOffAngle='0.78'
+                   radius='5'></SpotLight>
+        <pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1' ></pointLight>
 
         <!--Houses-->
         <Group DEF='House'>
@@ -40,7 +39,7 @@
                             <ImageTexture containerField='diffuseTexture' url="./assets/roofTexture.jpg"/>
                         </CommonSurfaceShader>
                     </Appearance>
-                    <Cone bottomRadius="1.8" height="1">
+                    <Cone bottomRadius="1.8" height="1" subdivision="4">
                     </Cone>
                 </Shape>
             </Transform>
@@ -73,6 +72,9 @@
     </scene>
 </x3d>
 <div id="tools" style="width: 500px;">
+    <input id="gameMode" type="checkbox" onclick="setGameMode()">
+    <label for="gameMode">Poruszanie się strzałkami</label>
+
     <input id="directionalLight" type="checkbox" checked="true" onclick="lightSwitch('directional')">
     <label for="directionalLight">Nieruchome światło kierunkowe</label>
 
@@ -87,9 +89,6 @@
 
     <input id="headlight" type="checkbox" checked="true" onclick="headlight()">
     <label for="headlight">Headlight</label>
-
-    <input id="gameMode" type="checkbox" onclick="setGameMode()">
-    <label for="gameMode">Poruszanie się strzałkami</label>
 </div>
 <script>
     function lightSwitch(id) {
