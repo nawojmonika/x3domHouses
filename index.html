@@ -8,7 +8,7 @@
 </head>
 <body>
 <x3d>
-    <scene>
+    <scene id="content">
         <Viewpoint position="19.54189 1.67126 -3.43897" orientation="-0.05584 0.99813 0.02471 1.74510" zNear="2.79038"
                    zFar="43.42864" description="defaultX3DViewpointNode"></Viewpoint>
         <background skyColor="0 0 0"></background>
@@ -44,84 +44,6 @@
                 </Shape>
             </Transform>
         </Group>
-        <!--Houses from right and left from original-->
-        <Transform translation="3 0 0">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="6 0 0">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="-3 0 0">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="-6 0 0">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <!-- Second row-->
-        <Transform translation="0 0 3">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="3 0 3">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="6 0 3">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="-3 0 3">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="-6 0 3">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <!-- Third row-->
-        <Transform translation="0 0 6">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="3 0 6">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="6 0 6">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="-3 0 6">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="-6 0 6">
-            <Shape USE="House"></Shape>
-        </Transform>
-
-        <!-- Fourth row with a break-->
-        <Transform translation="0 0 -6">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="3 0 -6">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="6 0 -6">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="-3 0 -6">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="-6 0 -6">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <!-- Fifth row-->
-        <Transform translation="0 0 -9">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="3 0 -9">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="6 0 -9">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="-3 0 -9">
-            <Shape USE="House"></Shape>
-        </Transform>
-        <Transform translation="-6 0 -9">
-            <Shape USE="House"></Shape>
-        </Transform>
         <!--Floor-->
         <Transform translation="0 -0.05 0" rotation="1 0 0 -1.57">
             <Shape>
@@ -155,7 +77,29 @@
             light.setAttribute('on', 'FALSE');
     }
 
-    (updateSun = () => {
+    function createHouses() {
+     var scene = document.getElementById("content");
+
+        // Houses from right and left from original
+        for(let i=-9; i<=9; i+=3){
+            for(let j=-9; j<=9; j+=3){
+                let transform = document.createElement("Transform");
+                let house = document.createElement("Shape");
+                house.setAttribute("USE", "House");
+                // Creating spaces
+                i = i === 0 ? i+3 : i;
+                j = j === 0 ? j+3 : j;
+                transform.setAttribute("translation", `${i} 0 ${j}`);
+                transform.appendChild(house);
+                scene.appendChild(transform);
+            }
+
+        }
+
+    }
+
+
+    function moveLighting() {
         let interval = setInterval(myTimer, 10);
         let theta = 0;  // angle that will be increased each loop
         let r = 30;
@@ -180,7 +124,15 @@
             document.getElementById("point").setAttribute('location', newPos.toString());
             theta += step;
         };
-    })();
+    };
+
+    function init(){
+        createHouses();
+        moveLighting();
+    }
+
+    init();
+
 </script>
 </body>
 </html>
