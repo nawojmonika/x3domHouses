@@ -11,22 +11,22 @@
     <scene id="content">
         <navigationInfo type='"examine" "any"' headlight="false" id="navType"></navigationInfo>
         <!--ViewPoints-->
-        <Viewpoint position="18.42716 7.53001 -0.49374" orientation="-0.19687 0.96414 0.17800 1.62916" zNear="2.79038"
+        <Viewpoint position="27.01942 11.04116 -0.72399" orientation="-0.19687 0.96414 0.17800 1.62916" zNear="2.79038"
                    zFar="43.42864" description="defaultX3DViewpointNode"></Viewpoint>
 
-        <Viewpoint id="walkingView" position="0.40672 0.57194 9.97534" orientation="-0.81516 0.57906 -0.01422 0.07025"
-                   zNear="0.00317" zFar="31.70807" description="defaultX3DViewpointNode"></Viewpoint>
+        <Viewpoint id="walkingView" position="-3.01719 1.04723 14.28986" orientation="-0.33571 -0.93794 0.08698 0.22072"
+                   zNear="0.00431" zFar="43.07147" description="defaultX3DViewpointNode"></Viewpoint>
 
 
         <background skyColor="0 0 0"></background>
         <!--Lights-->
-        <directionalLight id="directional" direction='-1 -1 0' on="TRUE" intensity='2.0' >
+        <directionalLight id="directional" direction='-1 -1 0' on="TRUE" intensity='2.0'>
         </directionalLight>
-        <SpotLight id='spot1' on="TRUE" beamWidth='5' color='0 0 1'  location='5 0 0' direction="3 1 0"
+        <SpotLight id='spot1' on="TRUE" beamWidth='5' color='0 0 1' location='5 0 0' direction="3 1 0"
                    radius='5'></SpotLight>
-        <SpotLight id='spot2' on="TRUE" beamWidth='5' color='1 0 0'  location='0 0 5' direction="1 1 0"
+        <SpotLight id='spot2' on="TRUE" beamWidth='5' color='1 0 0' location='0 0 5' direction="1 1 0"
                    radius='5'></SpotLight>
-        <pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1' ></pointLight>
+        <pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1'></pointLight>
 
         <!--Houses-->
         <Group DEF='House'>
@@ -35,7 +35,7 @@
                 <Shape DEF='Roof'>
                     <Appearance>
                         <CommonSurfaceShader diffuseFacor='1 1 1' specularFactor='1 1 1' shininessFactor='1'>
-                        <ImageTexture containerField='diffuseTexture' url="./assets/roofTexture.jpg"/>
+                            <ImageTexture containerField='diffuseTexture' url="./assets/roofTexture.jpg"/>
                         </CommonSurfaceShader>
                     </Appearance>
                     <Cone bottomRadius="1.8" height="1.5">
@@ -48,7 +48,7 @@
                     <Appearance>
                         <CommonSurfaceShader diffuseFacor='1 1 1' specularFactor='1 1 1' shininessFactor='1'>
 
-                        <ImageTexture containerField='diffuseTexture' url="./assets/wallTexture.jpg"/>
+                            <ImageTexture containerField='diffuseTexture' url="./assets/wallTexture.jpg"/>
                         </CommonSurfaceShader>
                     </Appearance>
                     <Box/>
@@ -61,7 +61,7 @@
                 <Appearance>
                     <CommonSurfaceShader diffuseFacor='1 1 1' specularFactor='1 1 1' shininessFactor='1'>
 
-                    <ImageTexture containerField='diffuseTexture' url="./assets/grassTexture.jpg"/>
+                        <ImageTexture containerField='diffuseTexture' url="./assets/grassTexture.jpg"/>
                     </CommonSurfaceShader>
                 </Appearance>
                 <plane size="30 30"/>
