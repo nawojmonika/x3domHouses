@@ -16,15 +16,13 @@
 
         <Viewpoint id="walkingView" position="0.40672 0.57194 9.97534" orientation="-0.81516 0.57906 -0.01422 0.07025"
                    zNear="0.00317" zFar="31.70807" description="defaultX3DViewpointNode"></Viewpoint>
-
-
         <background skyColor="0 0 0"></background>
         <!--Lights-->
         <directionalLight id="directional" direction='-1 -1 0' on="TRUE" intensity='2.0' >
         </directionalLight>
-        <SpotLight id='spot1' on="TRUE" beamWidth='5' color='0 0 1'  location='5 0 0' direction="3 1 0"
+        <SpotLight id='spot1' on="TRUE" beamWidth='5' color='0 0 1'  location='3 2 -1' direction="-4 0 3" cutOffAngle='0.78'
                    radius='5'></SpotLight>
-        <SpotLight id='spot2' on="TRUE" beamWidth='5' color='1 0 0'  location='0 0 5' direction="1 1 0"
+        <SpotLight id='spot2' on="TRUE" beamWidth='5' color='1 0 0'  location='8 2 -1' direction="0 -1 1" cutOffAngle='0.78'
                    radius='5'></SpotLight>
         <pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1' ></pointLight>
 
