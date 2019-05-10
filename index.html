@@ -9,19 +9,19 @@
 <body>
 <x3d>
     <scene id="content">
-        <navigationInfo type='"walk" "any"' id="navType"></navigationInfo>
-        <!--<Viewpoint position="19.54189 1.67126 -3.43897" orientation="-0.05584 0.99813 0.02471 1.74510" zNear="2.79038"-->
-                   <!--zFar="43.42864" description="defaultX3DViewpointNode"></Viewpoint>-->
+        <navigationInfo type='"examine" "any"' headlight="false" id="navType"></navigationInfo>
+        <Viewpoint position="19.54189 1.67126 -3.43897" orientation="-0.05584 0.99813 0.02471 1.74510" zNear="2.79038"
+                   zFar="43.42864" description="defaultX3DViewpointNode"></Viewpoint>
         <background skyColor="0 0 0"></background>
         <!--Lights-->
-        <directionalLight id="directional" direction='-1 -1 0' on="TRUE" intensity='2.0' shadowIntensity='0.5'>
-        </directionalLight>
-        <spotLight id='spot1' on="TRUE" color='0 0 1' location='6 1.5 -2' shadowIntensity="0.3" radius="2" intensity='1'
-                   ambientIntensity='1'></spotLight>
-        <spotLight id='spot2' on="TRUE" color='0 0 1' location='6 1.5 -6' direction="0 0 0" shadowIntensity="0.3"
-                   radius="2" intensity='1' ambientIntensity='1'></spotLight>
-        <pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1' color='0 0 1' location='-9 2 0.5 '
-                    shadowIntensity="0.5"></pointLight>
+        <!--<directionalLight id="directional" direction='-1 -1 0' on="TRUE" intensity='2.0' >-->
+        <!--</directionalLight>-->
+        <SpotLight id='spot1' on="TRUE" beamWidth='5' color='0 0 1'  location='5 0 0' direction="3 1 0"
+                   radius='5'></SpotLight>
+        <SpotLight id='spot2' on="TRUE" beamWidth='5' color='1 0 0'  location='0 0 5' direction="1 1 0"
+                   radius='5'></SpotLight>
+        <!--<pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1' color='0 0 1' location='-9 2 0.5 '-->
+                    <!--shadowIntensity="0.5"></pointLight>-->
 
         <!--Houses-->
         <Group DEF='House'>
@@ -29,7 +29,9 @@
             <Transform translation="0 2.5 0" rotation="0 1 0 0.785398163"> <!-- Rotate by 45 degrees-->
                 <Shape DEF='Roof'>
                     <Appearance>
-                        <ImageTexture url="./assets/roofTexture.jpg"/>
+                        <CommonSurfaceShader diffuseFacor='1 1 1' specularFactor='1 1 1' shininessFactor='1'>
+                        <ImageTexture containerField='diffuseTexture' url="./assets/roofTexture.jpg"/>
+                        </CommonSurfaceShader>
                     </Appearance>
                     <Cone bottomRadius="1.8" height="1">
                     </Cone>
@@ -39,7 +41,10 @@
             <Transform translation="0 1 0">
                 <Shape>
                     <Appearance>
-                        <ImageTexture url="./assets/wallTexture.jpg"/>
+                        <CommonSurfaceShader diffuseFacor='1 1 1' specularFactor='1 1 1' shininessFactor='1'>
+
+                        <ImageTexture containerField='diffuseTexture' url="./assets/wallTexture.jpg"/>
+                        </CommonSurfaceShader>
                     </Appearance>
                     <Cylinder/>
                 </Shape>
@@ -49,8 +54,12 @@
         <Transform translation="0 -0.05 0" rotation="1 0 0 -1.57">
             <Shape>
                 <Appearance>
-                    <ImageTexture url="./assets/grassTexture.jpg"/>
+                    <CommonSurfaceShader diffuseFacor='1 1 1' specularFactor='1 1 1' shininessFactor='1'>
+
+                    <ImageTexture containerField='diffuseTexture' url="./assets/grassTexture.jpg"/>
+                    </CommonSurfaceShader>
                 </Appearance>
+
                 <plane size="23 23"/>
             </Shape>
         </Transform>
@@ -69,6 +78,9 @@
     <input id="pointLight" type="checkbox" checked="true" onclick="lightSwitch('point')">
     <label for="pointLight">Poruszające się światło punktowe</label>
 
+    <input id="headlight" type="checkbox" checked="true" onclick="headlight()">
+    <label for="headlight">Headlight</label>
+
     <input id="gameMode" type="checkbox"  onclick="setGameMode()">
     <label for="gameMode">Poruszanie się strzałkami</label>
 </div>
@@ -79,6 +91,15 @@
             light.setAttribute('on', 'TRUE');
         else
             light.setAttribute('on', 'FALSE');
+    }
+
+    function headlight()
+    {
+        var h = document.getElementById("navType");
+        if(h.getAttribute('headlight')=='true')
+            h.setAttribute('headlight', 'false');
+        else
+            h.setAttribute('headlight', 'true');
     }
 
     function createHouses() {
@@ -136,7 +157,7 @@
 
     function init(){
         createHouses();
-        moveLighting();
+        // moveLighting();
     }
 
     init();
