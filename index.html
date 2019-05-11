@@ -90,16 +90,16 @@
                         <Shape USE='myMirrorShape' containerField='excludeNodes' ></Shape>
                         <Background skyColor='1 1 1' groundColor='1 1 1' containerField='background'></Background>
                         <Viewpoint id='myMirrorTextureViewPoint' zNear="0.1" zFar="1000" containerField='viewpoint' ></Viewpoint>
-                        <Group USE='MIRROR_SCENE'>
-                        </Group>
                     </RenderedTexture>
                 </Appearance>
             </Shape>
         </Transform>
 
-        <TimeSensor DEF='ts' cycleInterval='20' loop='true' startTime='0'></TimeSensor>
+        <TimeSensor DEF='ts' cycleInterval='10' loop='true' startTime='0'></TimeSensor>
+        <OrientationInterpolator DEF='oiMirror' key='0 0.25 0.5' keyValue='1 0 0 0  0 1 0 1  0 1 0 -1  1 0 0 0  1 0 0 0.5'></OrientationInterpolator>
         <ROUTE fromNode='ts' fromField='fraction_changed' toNode='oiMirror' toField='set_fraction'></ROUTE>
         <ROUTE fromNode='oiMirror' fromField='value_changed' toNode='mirrorTrans' toField='set_rotation'></ROUTE>
+
 
     </scene>
 </x3d>
