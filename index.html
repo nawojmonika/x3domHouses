@@ -117,6 +117,9 @@
     <input id="SSAO" type="checkbox" checked="true" onclick="SSAOSwich()">
     <label for="SSAO">SSAO</label>
 
+    <input id="gamma" type="checkbox" checked="true" onclick="gammaSwitch()">
+    <label for="gamma">Korekcja Gamma</label>
+
 </div>
 <script>
 
@@ -134,6 +137,14 @@
 
     function SSAOSwich() {
         switcher('myEnv', 'SSAO');
+    }
+
+    function gammaSwitch(){
+        var h = document.getElementById("myEnv");
+        if (h.getAttribute('gammaCorrectionDefault') == 'linear')
+            h.setAttribute('gammaCorrectionDefault', 'none');
+        else
+            h.setAttribute('gammaCorrectionDefault', 'linear');
     }
 
     function shadowSwitch(id) {
