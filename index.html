@@ -18,16 +18,21 @@
         <Viewpoint id="walkingView" position="0.40672 0.57194 9.97534" orientation="-0.81516 0.57906 -0.01422 0.07025"
                    zNear="0.00317" zFar="31.70807" description="defaultX3DViewpointNode"></Viewpoint>
 
+        <Viewpoint id="topView" position="0.27643 28.04095 0.34033" orientation="-0.57008 0.58026 0.58163 2.08624" zNear="2.79038"
+                   zFar="43.42864" description="defaultX3DViewpointNode"></Viewpoint>
+
 
         <background skyColor="0 0 0"></background>
         <!--Lights-->
         <directionalLight id="directional" direction='-1 -1 0' on="TRUE" intensity='2.0' shadowIntensity="0.2">
         </directionalLight>
-        <SpotLight id='spot1' on="TRUE" beamWidth='5' color='0 0 1'  location='3 2 -1' direction="-4 0 3" cutOffAngle='0.78'
+        <SpotLight id='spot1' on="TRUE" beamWidth='5' color='0 0 1' location='3 2 -1' direction="-4 0 3"
+                   cutOffAngle='0.78'
                    radius='5'></SpotLight>
-        <SpotLight id='spot2' on="TRUE" beamWidth='5' color='1 0 0'  location='8 2 -1' direction="0 -1 1" cutOffAngle='0.78'
+        <SpotLight id='spot2' on="TRUE" beamWidth='5' color='1 0 0' location='8 2 -1' direction="0 -1 1"
+                   cutOffAngle='0.78'
                    radius='5'></SpotLight>
-        <pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1' ></pointLight>
+        <pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1'></pointLight>
 
         <!--Houses-->
         <Group DEF='House'>
@@ -71,9 +76,12 @@
         </Transform>
     </scene>
 </x3d>
-<div id="tools" style="width: 500px;">
-    <input id="gameMode" type="checkbox" onclick="setGameMode()">
-    <label for="gameMode">Poruszanie się strzałkami</label>
+<div id="tools" style="width: 80vw;">
+    <div id="buttons">
+        <button onclick="setGameMode()">Poruszanie się strzałkami</button>
+        <button onclick="setTopView()">Widok z lotu ptaka</button>
+    </div>
+
 
     <input id="directionalLight" type="checkbox" checked="true" onclick="lightSwitch('directional')">
     <label for="directionalLight">Nieruchome światło kierunkowe</label>
@@ -87,7 +95,7 @@
     <input id="pointLight" type="checkbox" checked="true" onclick="lightSwitch('point')">
     <label for="pointLight">Poruszające się światło punktowe</label>
 
-    <input id="headlight" type="checkbox" checked="true" onclick="headlight()">
+    <input id="headlight" type="checkbox" onclick="headlight()">
     <label for="headlight">Headlight</label>
 </div>
 <script>
@@ -156,6 +164,10 @@
     function setGameMode() {
         document.getElementById('navType').setAttribute("type", "game");
         document.getElementById('walkingView').setAttribute('set_bind', 'true');
+    }
+
+    function setTopView(){
+        document.getElementById('topView').setAttribute('set_bind', 'true');
     }
 
     function init() {
