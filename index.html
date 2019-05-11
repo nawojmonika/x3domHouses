@@ -78,7 +78,7 @@
         </Transform>
     </scene>
 </x3d>
-<div id="tools" style="width: 80vw;">
+<div id="tools" style="width: 70vw; margin-top: 10px">
     <div id="buttons">
         <button onclick="setGameMode()">Poruszanie się strzałkami</button>
         <button onclick="setTopView()">Widok z lotu ptaka</button>
@@ -113,15 +113,27 @@
     <input id="pointShadow" type="checkbox" checked="true" onclick="shadowSwitch('point')">
     <label for="pointShadow">Poruszające się światło punktowe</label>
 
+    <h5>Środowisko</h5>
+    <input id="SSAO" type="checkbox" checked="true" onclick="SSAOSwich()">
+    <label for="SSAO">SSAO</label>
+
 </div>
 <script>
 
-    function lightSwitch(id) {
-        var light = document.getElementById(id);
-        if (light.getAttribute('on') != 'TRUE')
-            light.setAttribute('on', 'TRUE');
+    function switcher(id, attr) {
+        var elem = document.getElementById(id);
+        if (elem.getAttribute(attr) != 'TRUE')
+            elem.setAttribute(attr, 'TRUE');
         else
-            light.setAttribute('on', 'FALSE');
+            elem.setAttribute(attr, 'FALSE');
+    }
+
+    function lightSwitch(id) {
+        switcher(id, 'on');
+    }
+
+    function SSAOSwich() {
+        switcher('myEnv', 'SSAO');
     }
 
     function shadowSwitch(id) {
@@ -183,8 +195,8 @@
             //Set the newly created array as new position for the second ball
             document.getElementById("point").setAttribute('location', newPos.toString());
             theta += step;
-        };
-    };
+        }
+    }
 
     function setGameMode() {
         document.getElementById('navType').setAttribute("type", "game");
