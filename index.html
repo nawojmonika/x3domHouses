@@ -9,6 +9,8 @@
 <body>
 <x3d>
     <scene id="content">
+        <Environment id='myEnv' SSAO='true' SSAOamount='0.5' SSAOblurDepthTreshold='1.0' SSAOradius='0.7'
+                     gammaCorrectionDefault="linear"></Environment>
         <navigationInfo type='"examine" "any"' headlight="false" id="navType"></navigationInfo>
         <!--ViewPoints-->
         <Viewpoint position="27.01942 11.04116 -0.72399" orientation="-0.19687 0.96414 0.17800 1.62916" zNear="2.79038"
@@ -17,15 +19,20 @@
         <Viewpoint id="walkingView" position="-3.01719 1.04723 14.28986" orientation="-0.33571 -0.93794 0.08698 0.22072"
                    zNear="0.00431" zFar="43.07147" description="defaultX3DViewpointNode"></Viewpoint>
 
+        <Viewpoint id="topView" position="6.89130 33.18133 0.14439" orientation="-0.54409 0.65114 0.52914 1.96379" zNear="2.79038"
+                   zFar="43.42864" description="defaultX3DViewpointNode"></Viewpoint>
 
         <background skyColor="0 0 0"></background>
         <!--Lights-->
-        <directionalLight id="directional" on="TRUE" color="0 0 1" direction="-1 -1 0"></directionalLight>
-        <SpotLight id='spot1' on="TRUE" beamWidth='5' color='0 1 0' location='5 2 5' cutOffAngle='0.78' direction="0 0 -1"
-                   radius='5'></SpotLight>
-        <SpotLight id='spot2' on="TRUE" beamWidth='5' color='1 0 0' location='8 2 5' cutOffAngle='0.78' direction="1 0 0"
-                   radius='5'></SpotLight>
-        <pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1'></pointLight>
+        <directionalLight id="directional" on="TRUE" color="0 0 1" direction="-1 -1 0"
+                          shadowIntensity="0.5"></directionalLight>
+        <SpotLight id='spot1' on="TRUE" beamWidth='5' color='0 1 0' location='5 2 5' cutOffAngle='0.78'
+                   direction="0 0 -1"
+                   radius='5' shadowIntensity="0.5"></SpotLight>
+        <SpotLight id='spot2' on="TRUE" beamWidth='5' color='1 0 0' location='8 2 5' cutOffAngle='0.78'
+                   direction="1 0 0"
+                   radius='5' shadowIntensity="0.5"></SpotLight>
+        <pointLight id='point' on='TRUE' intensity='1' ambientIntensity='1' shadowIntensity="0.5"></pointLight>
 
         <!--Houses-->
         <Group DEF='House'>
@@ -68,10 +75,13 @@
         </Transform>
     </scene>
 </x3d>
-<div id="tools" style="width: 70vw;">
-    <input id="gameMode" type="checkbox" onclick="setGameMode()">
-    <label for="gameMode">Poruszanie się strzałkami</label>
+<div id="tools" style="width: 60vw; margin-top: 10px">
+    <div id="buttons">
+        <button onclick="setGameMode()">Poruszanie się strzałkami</button>
+        <button onclick="setTopView()">Widok z lotu ptaka</button>
+    </div>
 
+    <h5>Światła</h5>
     <input id="directionalLight" type="checkbox" checked="true" onclick="lightSwitch('directional')">
     <label for="directionalLight">Nieruchome światło kierunkowe</label>
 
@@ -84,16 +94,65 @@
     <input id="pointLight" type="checkbox" checked="true" onclick="lightSwitch('point')">
     <label for="pointLight">Poruszające się światło punktowe</label>
 
-    <input id="headlight" type="checkbox" checked="false" onclick="headlight()">
+    <input id="headlight" type="checkbox" onclick="headlight()">
     <label for="headlight">Headlight</label>
+
+    <h5>Cienie</h5>
+    <input id="directionalShadow" type="checkbox" checked="true" onclick="shadowSwitch('directional')">
+    <label for="directionalShadow">Nieruchome światło kierunkowe</label>
+
+    <input id="spot1Shadow" type="checkbox" checked="true" onclick="shadowSwitch('spot1')">
+    <label for="spot1Shadow">Światło reflektorowe 1</label>
+
+    <input id="spot2Shadow" type="checkbox" checked="true" onclick="shadowSwitch('spot2')">
+    <label for="spot2Shadow">Światło reflektorowe 2</label>
+
+    <input id="pointShadow" type="checkbox" checked="true" onclick="shadowSwitch('point')">
+    <label for="pointShadow">Poruszające się światło punktowe</label>
+
+    <h5>Środowisko</h5>
+    <input id="SSAO" type="checkbox" checked="true" onclick="SSAOSwich()">
+    <label for="SSAO">SSAO</label>
+
+    <input id="gamma" type="checkbox" checked="true" onclick="gammaSwitch()">
+    <label for="gamma">Korekcja Gamma</label>
+
 </div>
 <script>
-    function lightSwitch(id) {
-        var light = document.getElementById(id);
-        if (light.getAttribute('on') != 'TRUE')
-            light.setAttribute('on', 'TRUE');
+    function switcher(id, attr) {
+        var elem = document.getElementById(id);
+        if (elem.getAttribute(attr) != 'TRUE')
+            elem.setAttribute(attr, 'TRUE');
         else
-            light.setAttribute('on', 'FALSE');
+            elem.setAttribute(attr, 'FALSE');
+    }
+
+    function lightSwitch(id) {
+        switcher(id, 'on');
+    }
+
+    function SSAOSwich() {
+        switcher('myEnv', 'SSAO');
+    }
+
+    function gammaSwitch() {
+        var h = document.getElementById("myEnv");
+        if (h.getAttribute('gammaCorrectionDefault') == 'linear')
+            h.setAttribute('gammaCorrectionDefault', 'none');
+        else
+            h.setAttribute('gammaCorrectionDefault', 'linear');
+    }
+
+    function shadowSwitch(id) {
+        var light = document.getElementById(id);
+        if (light.getAttribute('shadowIntensity') == '0')
+            light.setAttribute('shadowIntensity', '0.5');
+        else
+            light.setAttribute('shadowIntensity', '0');
+    }
+
+    function setTopView(){
+        document.getElementById('topView').setAttribute('set_bind', 'true');
     }
 
     function headlight() {
