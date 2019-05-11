@@ -76,6 +76,31 @@
                 <plane size="23 23"/>
             </Shape>
         </Transform>
+
+        <!--Mirror-->
+        <Transform DEF="mirrorTrans" translation="-12 0 0" rotation="0 1 0 1.57079633">
+            <Shape id='myMirrorShape' DEF='myMirrorShape'>
+                <IndexedFaceSet solid="false" coordIndex='0 1 2 3 -1'>
+                    <Coordinate point='-6 -6 0, 6 -6 0, 6 6 0, -6 6 0'></Coordinate>
+                    <TextureCoordinate point='1 1, 0 1, 0 0, 1 0'></TextureCoordinate>
+                </IndexedFaceSet>
+                <Appearance DEF='rtApp'>
+                    <RenderedTexture id='myRenderedTexture' update='always' dimensions='512 512 4'
+                                     repeatS='false' repeatT='false' >
+                        <Shape USE='myMirrorShape' containerField='excludeNodes' ></Shape>
+                        <Background skyColor='1 1 1' groundColor='1 1 1' containerField='background'></Background>
+                        <Viewpoint id='myMirrorTextureViewPoint' zNear="0.1" zFar="1000" containerField='viewpoint' ></Viewpoint>
+                        <Group USE='MIRROR_SCENE'>
+                        </Group>
+                    </RenderedTexture>
+                </Appearance>
+            </Shape>
+        </Transform>
+
+        <TimeSensor DEF='ts' cycleInterval='20' loop='true' startTime='0'></TimeSensor>
+        <ROUTE fromNode='ts' fromField='fraction_changed' toNode='oiMirror' toField='set_fraction'></ROUTE>
+        <ROUTE fromNode='oiMirror' fromField='value_changed' toNode='mirrorTrans' toField='set_rotation'></ROUTE>
+
     </scene>
 </x3d>
 <div id="tools" style="width: 70vw; margin-top: 10px">
